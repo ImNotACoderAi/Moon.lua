@@ -806,6 +806,264 @@ function Moon.CreateLib()
 			return Slider
 		end
 		
+		function Tab.Dropdown(options)
+			options = Moon.validate({
+				name = "Preview Dropdown",
+				callback = function(v) print(v) end,
+				items = {}
+			}, options or {})
+
+			local Dropdown = {
+				Items = {
+					["id"] = { 
+						"value"
+					}
+				},
+				Open = false,
+				MouseDown = false,
+				Hover = false,
+				HoveringItem = false
+			}
+			
+			do
+				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown
+				Dropdown["32"] = Instance.new("Frame", Tab["14"]);
+				Dropdown["32"]["BorderSizePixel"] = 0;
+				Dropdown["32"]["BackgroundColor3"] = Color3.fromRGB(48, 48, 48);
+				Dropdown["32"]["ClipsDescendants"] = true;
+				Dropdown["32"]["Size"] = UDim2.new(1, 0, 0, 32);
+				Dropdown["32"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Dropdown["32"]["Name"] = [[Dropdown]];
+
+				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.UICorner
+				Dropdown["33"] = Instance.new("UICorner", Dropdown["32"]);
+				Dropdown["33"]["CornerRadius"] = UDim.new(0, 7);
+
+				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Title
+				Dropdown["34"] = Instance.new("TextLabel", Dropdown["32"]);
+				Dropdown["34"]["BorderSizePixel"] = 0;
+				Dropdown["34"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+				Dropdown["34"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				Dropdown["34"]["TextSize"] = 14;
+				Dropdown["34"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+				Dropdown["34"]["TextColor3"] = Color3.fromRGB(221, 221, 221);
+				Dropdown["34"]["BackgroundTransparency"] = 1;
+				Dropdown["34"]["Size"] = UDim2.new(1, 0, 0, 20);
+				Dropdown["34"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Dropdown["34"]["Text"] = options["name"];
+				Dropdown["34"]["Name"] = [[Title]];
+
+				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.UIPadding
+				Dropdown["35"] = Instance.new("UIPadding", Dropdown["32"]);
+				Dropdown["35"]["PaddingTop"] = UDim.new(0, 5);
+				Dropdown["35"]["PaddingRight"] = UDim.new(0, 5);
+				Dropdown["35"]["PaddingLeft"] = UDim.new(0, 5);
+				Dropdown["35"]["PaddingBottom"] = UDim.new(0, 5);
+
+				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Icon
+				Dropdown["36"] = Instance.new("ImageLabel", Dropdown["32"]);
+				Dropdown["36"]["BorderSizePixel"] = 0;
+				Dropdown["36"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				Dropdown["36"]["AnchorPoint"] = Vector2.new(1, 0);
+				Dropdown["36"]["Image"] = [[rbxassetid://17633995554]];
+				Dropdown["36"]["Size"] = UDim2.new(0, 20, 0, 20);
+				Dropdown["36"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Dropdown["36"]["BackgroundTransparency"] = 1;
+				Dropdown["36"]["Name"] = [[Icon]];
+				Dropdown["36"]["Position"] = UDim2.new(1, -1, 0, 0);
+
+				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Options
+				Dropdown["37"] = Instance.new("ScrollingFrame", Dropdown["32"]);
+				Dropdown["37"]["Visible"] = false;
+				Dropdown["37"]["BorderSizePixel"] = 0;
+				Dropdown["37"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				Dropdown["37"]["Name"] = [[Options]];
+				Dropdown["37"]["Selectable"] = false;
+				Dropdown["37"]["Size"] = UDim2.new(1, 0, 1, -26);
+				Dropdown["37"]["Position"] = UDim2.new(0, 0, 0, 26);
+				Dropdown["37"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				Dropdown["37"]["ScrollBarThickness"] = 0;
+				Dropdown["37"]["BackgroundTransparency"] = 1;
+				Dropdown["37"]["SelectionGroup"] = false;
+
+				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Options.UIListLayout
+				Dropdown["38"] = Instance.new("UIListLayout", Dropdown["37"]);
+				Dropdown["38"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+				Dropdown["38"]["Padding"] = UDim.new(0, 8);
+				Dropdown["38"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Options.UIPadding
+				Dropdown["39"] = Instance.new("UIPadding", Dropdown["37"]);
+				Dropdown["39"]["PaddingTop"] = UDim.new(0, 1);
+				Dropdown["39"]["PaddingRight"] = UDim.new(0, 1);
+				Dropdown["39"]["PaddingLeft"] = UDim.new(0, 1);
+				Dropdown["39"]["PaddingBottom"] = UDim.new(0, 1);
+			end
+			
+			do
+				function Dropdown:Add(id, value)
+					local Item = {
+						Hover = false,
+						MouseDown = false
+					}
+
+					if Dropdown.Items[id] ~= nil then
+						return
+					end
+
+					Dropdown.Items[id] = {
+						instance = {},
+						value = value
+					}
+					-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Options.Inactive
+					Dropdown.Items[id].instance["3a"] = Instance.new("TextLabel", Dropdown["37"]);
+					Dropdown.Items[id].instance["3a"]["BorderSizePixel"] = 0;
+					Dropdown.Items[id].instance["3a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+					Dropdown.Items[id].instance["3a"]["BackgroundColor3"] = Color3.fromRGB(64, 64, 64);
+					Dropdown.Items[id].instance["3a"]["TextSize"] = 14;
+					Dropdown.Items[id].instance["3a"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+					Dropdown.Items[id].instance["3a"]["TextColor3"] = Color3.fromRGB(221, 221, 221);
+					Dropdown.Items[id].instance["3a"]["Size"] = UDim2.new(1, 0, 0, 30);
+					Dropdown.Items[id].instance["3a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+					Dropdown.Items[id].instance["3a"]["Text"] = id;
+					Dropdown.Items[id].instance["3a"]["Name"] = [[Inactive]];
+
+					-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Items[id].instance.Options.Inactive.UICorner
+					Dropdown.Items[id].instance["3b"] = Instance.new("UICorner", Dropdown.Items[id].instance["3a"]);
+					Dropdown.Items[id].instance["3b"]["CornerRadius"] = UDim.new(0, 6);
+
+					-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Items[id].instance.Options.Inactive.UIPadding
+					Dropdown.Items[id].instance["3c"] = Instance.new("UIPadding", Dropdown.Items[id].instance["3a"]);
+					Dropdown.Items[id].instance["3c"]["PaddingLeft"] = UDim.new(0, 7);
+
+					Dropdown.Items[id].instance["3a"].MouseEnter:Connect(function()
+						Item.Hover = true
+						Dropdown.HoveringItem = true
+
+						Moon.tween(ti, Dropdown.Items[id].instance["3a"], {Color = Color3.fromRGB(75, 75, 75)})
+					end)
+
+					Dropdown.Items[id].instance["3a"].MouseLeave:Connect(function()
+						Item.Hover = false
+						Dropdown.HoveringItem = false
+
+						if not Item.MouseDown then
+							Moon.tween(ti, Dropdown.Items[id].instance["3a"], {Color = Color3.fromRGB(64, 64, 64)})
+						end
+					end)
+
+					input.InputBegan:Connect(function(input)
+
+						if Dropdown.Items[id] == nil then return end
+
+						if input.UserInputType == Enum.UserInputType.MouseButton1 and Item.Hover then
+							Item.MouseDown = true
+							Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(85, 85, 85)})
+							options.callback(value)
+							Dropdown:Toggle()
+						end
+					end)
+
+					input.InputEnded:Connect(function(input, gpe)
+						if gpe then return end
+
+						if Dropdown.Items[id] == nil then return end
+
+						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							Item.MouseDown = false
+
+							if Item.Hover then
+								Moon.tween(ti, Dropdown.Items[id].instance["3a"], {Color = Color3.fromRGB(75, 75, 75)})
+							else
+								Moon.tween(ti, Dropdown.Items[id].instance["3a"], {Color = Color3.fromRGB(64, 64, 64)})
+							end
+						end
+					end)
+				end
+
+				function Dropdown:Remove(id)
+					if Dropdown.Items[id] ~= nil then
+						if Dropdown.Items[id].instance ~= nil then
+							for i, v in pairs(Dropdown.Items[id].instance) do
+								v:Destroy()
+							end
+						end
+						Dropdown.Items[id] = nil
+					end
+				end
+
+				function Dropdown:Clear()
+					for i, v in pairs(Dropdown.Items) do
+						Dropdown:Remove(i)
+					end
+				end
+
+				function Dropdown:Toggle()
+					Dropdown.Open = not Dropdown.Open
+
+					if not Dropdown.Open then
+						Moon.tween(ti, Dropdown["32"], {Size = UDim2.new(1, 0, 0, 95)}, function()
+							Dropdown["37"].Visible = false
+						end)
+					else
+						local count = 0
+						for i, v in pairs(Dropdown.Items) do
+							if v ~= nil then
+								count += 1
+							end
+						end
+
+						Dropdown["37"].Visible = true
+						Moon.tween(ti, Dropdown["32"], {Size = UDim2.new(1, 0, 0, 95 + (count * 16) + 1)})
+					end
+				end
+			end
+			
+			do
+				Dropdown["32"].MouseEnter:Connect(function()
+					Dropdown.Hover = true
+
+					Moon.tween(ti, Dropdown["32"], {Color = Color3.fromRGB(68, 68, 68)})
+				end)
+
+				Dropdown["32"].MouseLeave:Connect(function()
+					Dropdown.Hover = false
+
+					if not Dropdown.MouseDown then
+						Moon.tween(ti, Dropdown["32"], {Color = Color3.fromRGB(48, 48, 48)})
+					end
+				end)
+
+				input.InputBegan:Connect(function(input)
+
+					if input.UserInputType == Enum.UserInputType.MouseButton1 and Dropdown.Hover then
+						Dropdown.MouseDown = true
+						Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
+
+						if not Dropdown.HoveringItem then
+							Dropdown:Toggle()
+						end
+					end
+				end)
+
+				input.InputEnded:Connect(function(input, gpe)
+					if gpe then return end
+
+					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						Dropdown.MouseDown = false
+
+						if Dropdown.Hover then
+							Moon.tween(ti, Dropdown["32"], {Color = Color3.fromRGB(68, 68, 68)})
+						else
+							Moon.tween(ti, Dropdown["32"], {Color = Color3.fromRGB(48, 48, 48)})
+						end
+					end
+				end)
+			end
+			
+			return Dropdown
+		end
+		
 		return Tab
 	end
 	
