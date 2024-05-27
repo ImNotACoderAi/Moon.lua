@@ -824,7 +824,7 @@ function Moon.CreateLib()
 		end)
 		
 		input.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 and lib.Close then
 				for i, v in lib["2"]:GetDescendants() do
 					if v:IsA("Frame") then
 						Moon.tween(ti,v, {BackgroundTransparency = 1}, function() v.Visible = false end)
