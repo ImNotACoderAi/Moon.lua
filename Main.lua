@@ -182,7 +182,7 @@ function Moon.CreateLib()
 	function lib.Tab(options)
 		options = Moon.validate({
 			name = "Preview Tab",
-			icon = "rbxassetid://17593047148"
+			icon = "rbxassetid://17594347148"
 		}, options or {})
 		
 		local Tab = {
@@ -227,7 +227,7 @@ function Moon.CreateLib()
 			-- StarterGui.Moon.Main.TabContainer.TabWrapper
 			Tab["14"] = Instance.new("ScrollingFrame", lib["13"]);
 			Tab["14"]["Active"] = true;
-			Tab["14"]["ScrollingDirection"] = Enum.ScrollingDirection.X;
+			Tab["14"]["ScrollingDirection"] = Enum.ScrollingDirection.Y;
 			Tab["14"]["BorderSizePixel"] = 0;
 			Tab["14"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 			Tab["14"]["Name"] = [[TabWrapper]];
