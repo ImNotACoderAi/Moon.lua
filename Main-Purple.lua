@@ -699,7 +699,7 @@ function Moon.CreateLib(themes)
 				name = "Preview Slider",
 				min = 0,
 				max = 100,
-				default = (options["max"]/2),
+				default = 50,
 				callback = function(v) print(v) end
 			}, options or {})
 
