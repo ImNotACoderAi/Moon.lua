@@ -12,6 +12,11 @@ https://discord.gg/WTaFGBGyHA
 
 ## docs
 
+### Importing the library
+```lua
+local Library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ImNotACoderAi/Moon.lua/main/Main.lua')))()
+```
+
 ### Library.CreateLib(options)
 - `options`:
   - `bgt`: Background transparency (default: 0).
