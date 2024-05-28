@@ -300,7 +300,7 @@ function Moon.CreateLib(themes)
 				end
 
 				Tab.Active = true
-				Moon.tween(ti, Tab["9"], {BackgroundTransparency = .8})
+				Moon.tween(ti, Tab["9"], {BackgroundTransparency = 0})
 				Moon.tween(ti, Tab["9"], {TextColor3 = Color3.fromRGB(255, 255, 255)})
 				Moon.tween(ti, Tab["c"], {ImageColor3 = Color3.fromRGB(255, 255, 255)})
 				Tab["14"].Visible = true
@@ -555,7 +555,7 @@ function Moon.CreateLib(themes)
 					if Toggle.State == true then
 						Moon.tween(ti, Toggle["20"], {BackgroundColor3 = Color3.fromRGB(125, 201, 102)})
 					else
-						Moon.tween(ti, Toggle["20"], {BackgroundColor3 = Color3.fromRGB(45, 45, 45)})
+						Moon.tween(ti, Toggle["20"], {BackgroundColor3 = Color3.fromRGB(42, 42, 42)})
 					end
 				end)
 
@@ -568,7 +568,7 @@ function Moon.CreateLib(themes)
 						if Toggle.State == true then
 							Moon.tween(ti, Toggle["20"], {BackgroundColor3 = Color3.fromRGB(125, 201, 102)})
 						else
-							Moon.tween(ti, Toggle["20"], {BackgroundColor3 = Color3.fromRGB(45, 45, 45)})
+							Moon.tween(ti, Toggle["20"], {BackgroundColor3 = Color3.fromRGB(35, 35, 35)})
 						end
 					end
 				end)
@@ -643,6 +643,7 @@ function Moon.CreateLib(themes)
 				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Info.Title.UIPadding
 				Label["26"] = Instance.new("UIPadding", Label["25"]);
 				Label["26"]["PaddingLeft"] = UDim.new(0, 24);
+				Label["26"]["PaddingTop"] = UDim.new(0, 1);
 
 				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Info.UIPadding
 				Label["27"] = Instance.new("UIPadding", Label["23"]);
@@ -656,11 +657,11 @@ function Moon.CreateLib(themes)
 				Label["28"]["BorderSizePixel"] = 0;
 				Label["28"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 				Label["28"]["Image"] = [[rbxassetid://17594574177]];
-				Label["28"]["Size"] = UDim2.new(0, 20, 0, 20);
+				Label["28"]["Size"] = UDim2.new(0, 18, 0, 18);
 				Label["28"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 				Label["28"]["BackgroundTransparency"] = 1;
 				Label["28"]["Name"] = [[Info]];
-				Label["28"]["Position"] = UDim2.new(0, 0, 0, -2.5);
+				Label["28"]["Position"] = UDim2.new(0, -0, 0, -1);
 			end
 			
 			do
@@ -676,6 +677,16 @@ function Moon.CreateLib(themes)
 					Label["25"].Size = UDim2.new(Label["25"].Size.X.Scale, Label["25"].Size.X.Offset, 0, Label["25"].TextBounds.Y)
 					Moon.tween(ti, Label["23"], {Size = UDim2.new(Label["23"].Size.X.Scale, Label["23"].Size.X.Offset, 0, Label["25"].TextBounds.Y + 12)})
 				end
+				
+				Label["23"].MouseEnter:Connect(function()
+					Moon.tween(ti, Label["23"], {BackgroundColor3 = Color3.fromRGB(68, 68, 68)})
+					Moon.tween(ti, Label["25"], {TextColor3 = Color3.fromRGB(255, 255, 255)})
+				end)
+				
+				Label["23"].MouseLeave:Connect(function()
+					Moon.tween(ti, Label["23"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
+					Moon.tween(ti, Label["25"], {TextColor3 = Color3.fromRGB(221, 221, 221)})
+				end)
 
 				Label._update()
 			end
@@ -688,7 +699,7 @@ function Moon.CreateLib(themes)
 				name = "Preview Slider",
 				min = 0,
 				max = 100,
-				default = 50,
+				default = (options["max"]/2),
 				callback = function(v) print(v) end
 			}, options or {})
 			
@@ -942,7 +953,12 @@ function Moon.CreateLib(themes)
 			end
 			
 			do
-				function Dropdown:Add(id, value)
+				function Dropdown.Add(id, value, call, options)
+					options = Moon.validate({
+						callback = function(call) print(call) end,
+						items = {}
+					}, options or {})
+					
 					local Item = {
 						Hover = false,
 						MouseDown = false
@@ -954,34 +970,38 @@ function Moon.CreateLib(themes)
 
 					Dropdown.Items[id] = {
 						instance = {},
-						value = value
+						value = value,
+						call = value
 					}
-					-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Options.Inactive
-					Dropdown.Items[id].instance["3a"] = Instance.new("TextLabel", Dropdown["37"]);
-					Dropdown.Items[id].instance["3a"]["BorderSizePixel"] = 0;
-					Dropdown.Items[id].instance["3a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-					Dropdown.Items[id].instance["3a"]["BackgroundColor3"] = Color3.fromRGB(64, 64, 64);
-					Dropdown.Items[id].instance["3a"]["TextSize"] = 14;
-					Dropdown.Items[id].instance["3a"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-					Dropdown.Items[id].instance["3a"]["TextColor3"] = Color3.fromRGB(221, 221, 221);
-					Dropdown.Items[id].instance["3a"]["Size"] = UDim2.new(1, 0, 0, 30);
-					Dropdown.Items[id].instance["3a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-					Dropdown.Items[id].instance["3a"]["Text"] = id;
-					Dropdown.Items[id].instance["3a"]["Name"] = [[Inactive]];
+					
+					do
+						-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Options.Inactive
+						Dropdown.Items[id].instance["3a"] = Instance.new("TextLabel", Dropdown["37"]);
+						Dropdown.Items[id].instance["3a"]["BorderSizePixel"] = 0;
+						Dropdown.Items[id].instance["3a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+						Dropdown.Items[id].instance["3a"]["BackgroundColor3"] = Color3.fromRGB(57, 57, 57);
+						Dropdown.Items[id].instance["3a"]["TextSize"] = 14;
+						Dropdown.Items[id].instance["3a"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+						Dropdown.Items[id].instance["3a"]["TextColor3"] = Color3.fromRGB(221, 221, 221);
+						Dropdown.Items[id].instance["3a"]["Size"] = UDim2.new(1, 0, 0, 30);
+						Dropdown.Items[id].instance["3a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+						Dropdown.Items[id].instance["3a"]["Text"] = id;
+						Dropdown.Items[id].instance["3a"]["Name"] = [[Inactive]];
 
-					-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Items[id].instance.Options.Inactive.UICorner
-					Dropdown.Items[id].instance["3b"] = Instance.new("UICorner", Dropdown.Items[id].instance["3a"]);
-					Dropdown.Items[id].instance["3b"]["CornerRadius"] = UDim.new(0, 6);
+						-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Items[id].instance.Options.Inactive.UICorner
+						Dropdown.Items[id].instance["3b"] = Instance.new("UICorner", Dropdown.Items[id].instance["3a"]);
+						Dropdown.Items[id].instance["3b"]["CornerRadius"] = UDim.new(0, 6);
 
-					-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Items[id].instance.Options.Inactive.UIPadding
-					Dropdown.Items[id].instance["3c"] = Instance.new("UIPadding", Dropdown.Items[id].instance["3a"]);
-					Dropdown.Items[id].instance["3c"]["PaddingLeft"] = UDim.new(0, 7);
+						-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Items[id].instance.Options.Inactive.UIPadding
+						Dropdown.Items[id].instance["3c"] = Instance.new("UIPadding", Dropdown.Items[id].instance["3a"]);
+						Dropdown.Items[id].instance["3c"]["PaddingLeft"] = UDim.new(0, 7);
+					end
 
 					Dropdown.Items[id].instance["3a"].MouseEnter:Connect(function()
 						Item.Hover = true
 						Dropdown.HoveringItem = true
-
-						Moon.tween(ti, Dropdown.Items[id].instance["3a"], {Color = Color3.fromRGB(75, 75, 75)})
+						
+						Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(62, 62, 62)})
 					end)
 
 					Dropdown.Items[id].instance["3a"].MouseLeave:Connect(function()
@@ -989,24 +1009,23 @@ function Moon.CreateLib(themes)
 						Dropdown.HoveringItem = false
 
 						if not Item.MouseDown then
-							Moon.tween(ti, Dropdown.Items[id].instance["3a"], {Color = Color3.fromRGB(64, 64, 64)})
+							Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(58, 58, 58)})
 						end
 					end)
-
+					
 					input.InputBegan:Connect(function(input)
 
 						if Dropdown.Items[id] == nil then return end
 
 						if input.UserInputType == Enum.UserInputType.MouseButton1 and Item.Hover then
 							Item.MouseDown = true
-							Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(85, 85, 85)})
-							options.callback(value)
+							Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(62, 62, 62)})
 							Dropdown:Toggle()
+							options.callback(value)
 						end
 					end)
 
-					input.InputEnded:Connect(function(input, gpe)
-						if gpe then return end
+					input.InputEnded:Connect(function(input)
 
 						if Dropdown.Items[id] == nil then return end
 
@@ -1014,15 +1033,15 @@ function Moon.CreateLib(themes)
 							Item.MouseDown = false
 
 							if Item.Hover then
-								Moon.tween(ti, Dropdown.Items[id].instance["3a"], {Color = Color3.fromRGB(75, 75, 75)})
+								Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(62, 62, 62)})
 							else
-								Moon.tween(ti, Dropdown.Items[id].instance["3a"], {Color = Color3.fromRGB(64, 64, 64)})
+								Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(58, 58, 58)})
 							end
 						end
 					end)
 				end
 
-				function Dropdown:Remove(id)
+				function Dropdown.Remove(id)
 					if Dropdown.Items[id] ~= nil then
 						if Dropdown.Items[id].instance ~= nil then
 							for i, v in pairs(Dropdown.Items[id].instance) do
@@ -1033,17 +1052,17 @@ function Moon.CreateLib(themes)
 					end
 				end
 
-				function Dropdown:Clear()
+				function Dropdown.Clear()
 					for i, v in pairs(Dropdown.Items) do
 						Dropdown:Remove(i)
 					end
 				end
 
-				function Dropdown:Toggle()
+				function Dropdown.Toggle()
 					Dropdown.Open = not Dropdown.Open
 
 					if not Dropdown.Open then
-						Moon.tween(ti, Dropdown["32"], {Size = UDim2.new(1, 0, 0, 95)}, function()
+						Moon.tween(ti, Dropdown["32"], {Size = UDim2.new(1, 0, 0, 30)}, function()
 							Dropdown["37"].Visible = false
 						end)
 					else
@@ -1055,23 +1074,28 @@ function Moon.CreateLib(themes)
 						end
 
 						Dropdown["37"].Visible = true
-						Moon.tween(ti, Dropdown["32"], {Size = UDim2.new(1, 0, 0, 95 + (count * 16) + 1)})
+						Moon.tween(ti, Dropdown["32"], {Size = UDim2.new(1, 0, 0, 30 + (count * 25) + 3)})
 					end
 				end
 			end
-			
+
+			-- Logic
 			do
 				Dropdown["32"].MouseEnter:Connect(function()
 					Dropdown.Hover = true
-
-					Moon.tween(ti, Dropdown["32"], {Color = Color3.fromRGB(68, 68, 68)})
+					
+					if not Dropdown.Open then
+						Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(68, 68, 68)})
+					else
+						Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
+					end
 				end)
 
 				Dropdown["32"].MouseLeave:Connect(function()
 					Dropdown.Hover = false
 
 					if not Dropdown.MouseDown then
-						Moon.tween(ti, Dropdown["32"], {Color = Color3.fromRGB(48, 48, 48)})
+						Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
 					end
 				end)
 
@@ -1079,33 +1103,41 @@ function Moon.CreateLib(themes)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Dropdown.Hover then
 						Dropdown.MouseDown = true
-						Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
-
+						if not Dropdown.Open then
+							Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(74, 74, 74)})
+							wait(0.1)
+							Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
+						else
+							Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
+						end
+						
 						if not Dropdown.HoveringItem then
-							Dropdown:Toggle()
+							Dropdown.Toggle()
 						end
 					end
 				end)
 
-				input.InputEnded:Connect(function(input, gpe)
-					if gpe then return end
+				input.InputEnded:Connect(function(input)
 
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						Dropdown.MouseDown = false
 
-						if Dropdown.Hover then
-							Moon.tween(ti, Dropdown["32"], {Color = Color3.fromRGB(68, 68, 68)})
-						else
-							Moon.tween(ti, Dropdown["32"], {Color = Color3.fromRGB(48, 48, 48)})
+						if Dropdown.Hover and not Dropdown.Open then
+							Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(68, 68, 68)})
+						elseif not Dropdown and not Dropdown.Open then
+							Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
+						elseif Dropdown.Open then
+							Dropdown["32"].BackgroundColor3 = Color3.fromRGB(48, 48, 48)
 						end
 					end
 				end)
 			end
-			
-			return Dropdown
+					
+			local items = options.items
+					
+		return Dropdown
 		end
-		
-		return Tab
+	return Tab
 	end
 	
 	function lib.Notify(options)
@@ -1116,7 +1148,7 @@ function Moon.CreateLib(themes)
 			timeout = 4
 		}, options or {})
 		
-		if options["timeout"] <= 4 then options["timeout"] = 4 print("Timeout number cannot be lower than 4") end
+		if options["timeout"] < 4 then options["timeout"] = 4 print("Timeout number cannot be lower than 4") end
 		
 		local Notify = {}
 		
@@ -1161,7 +1193,7 @@ function Moon.CreateLib(themes)
 		Notify["48"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 		Notify["48"]["TextColor3"] = Color3.fromRGB(221, 221, 221);
 		Notify["48"]["BackgroundTransparency"] = 1;
-		Notify["48"]["Size"] = UDim2.new(1, 0, 1, 0);
+		Notify["48"]["Size"] = UDim2.new(1, -25, 1, -1/2);
 		Notify["48"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		Notify["48"]["Text"] = options["title"];
 		Notify["48"]["Name"] = [[Title]];
@@ -1174,7 +1206,7 @@ function Moon.CreateLib(themes)
 
 		-- StarterGui.Moon.Notification Holder.Notif.Desc
 		Notify["4a"] = Instance.new("TextLabel", Notify["45"]);
-		Notify["4a"]["TextWrapped"] = true;
+		Notify["4a"]["TextScaled"] = true;
 		Notify["4a"]["BorderSizePixel"] = 0;
 		Notify["4a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
 		Notify["4a"]["TextYAlignment"] = Enum.TextYAlignment.Bottom;
@@ -1183,11 +1215,13 @@ function Moon.CreateLib(themes)
 		Notify["4a"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Light, Enum.FontStyle.Normal);
 		Notify["4a"]["TextColor3"] = Color3.fromRGB(96, 96, 96);
 		Notify["4a"]["BackgroundTransparency"] = 1;
-		Notify["4a"]["Size"] = UDim2.new(1, 0, 1, 0);
+		Notify["4a"]["Size"] = UDim2.new(1, -25, .5, 0);
 		Notify["4a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		Notify["4a"]["Text"] = options["desc"];
 		Notify["4a"]["Name"] = [[Desc]];
 		Notify["4a"]["TextTransparency"] = 1;
+		Notify["4a"]["AnchorPoint"] = Vector2.new(0, 1);
+		Notify["4a"]["Position"] = UDim2.new(0, 0, 1, 0);
 
 		-- StarterGui.Moon.Notification Holder.Notif.Desc.UIPadding
 		Notify["4b"] = Instance.new("UIPadding", Notify["4a"]);
@@ -1262,9 +1296,68 @@ function Moon.CreateLib(themes)
 					elseif v.Name == "Shadow" then
 
 						if done == true then
-							lib["1"]:Destroy()
+							lib["1"].Enabled = false
+							lib.Close = false
 						end
 					end	
+				end
+			end
+		end)
+		
+		input.InputBegan:Connect(function(input)
+			if input.KeyCode == Enum.KeyCode.RightControl and lib.Close == false then
+				lib["1"].Enabled = true
+				lib.Close = true
+				Moon.tween(tis, lib["2"], {Size = UDim2.new(0, 480, 0, 330)})
+				wait(0.8)
+				for i, v in lib["2"]:GetDescendants() do
+					if v.Name == "TabContainer" then
+						v.Visible = true
+						for i, c in v:GetDescendants() do
+							if c.Name == "TabWrapper" then
+								c.Visible = true
+							end
+							if c:IsA("Frame") then
+								c.Visible = true
+								Moon.tween(ti, c, {BackgroundTransparency = 0})
+							elseif c:IsA("ScrollingFrame") and c.Name == "Options" then
+								c.Visible = true
+								for i, o in c:GetDescendants() do
+									if o:IsA("TextLabel") then
+										o.BackgroundTransparency = 0
+									end
+								end
+							end
+							if c:IsA("TextLabel") then
+								c.Visible = true
+								Moon.tween(ti, c, {TextTransparency = 0})
+							end
+							if c:IsA("ImageLabel") and c.Name ~= "Checkmark" then
+								c.Visible = true
+								Moon.tween(ti, c, {ImageTransparency = 0})
+							end
+						end
+					
+					elseif v.Name == "Nav" then
+						v.Visible = true
+						for i, d in v:GetDescendants() do
+							if d.Name == "Close" then
+								d.Visible = true
+								Moon.tween(ti, d, {ImageTransparency = 0})
+							end
+							if d:IsA("TextLabel") and d.Name ~= "Tab" then
+								d.Visible = true
+								Moon.tween(ti, d, {BackgroundTransparency = 0})
+								Moon.tween(ti, d, {TextTransparency = 0})
+							elseif d:IsA("TextLabel") and d.Name == "Tab" then
+								Moon.tween(ti, d, {TextTransparency = 0})
+							end
+							if d:IsA("ImageLabel") then
+								d.Visible = true
+								Moon.tween(ti, d, {ImageTransparency = 0})
+							end
+						end
+					end
 				end
 			end
 		end)
