@@ -16,43 +16,58 @@ https://discord.gg/WTaFGBGyHA
 ```lua
 local Library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ImNotACoderAi/Moon.lua/main/Main.lua')))()
 ```
-
+```lua
 ### Library.CreateLib(options)
 - `options`:
   - `bgt`: Background transparency (default: 0).
+```
 
+```lua
 ### window.Tab(options)
 - `options`:
   - `name`: Name of the tab.
   - `icon`: Icon for the tab (Roblox asset id).
+```
 
+```lua
 ### tab.Button(options)
 - `options`:
   - `name`: Name of the button.
   - `callback`: Function to call when the button is clicked.
+```
 
+```lua
 ### tab.Toggle(options)
 - `options`:
   - `name`: Name of the toggle.
   - `callback`: Function to call when the toggle state changes. Receives a boolean parameter `state`.
+```
 
+```lua
 ### tab.Label(options)
 - `options`:
   - `text`: Text to display in the label.
+```
 
+```lua
 ### tab.Dropdown(options)
 - `options`:
   - `name`: Name of the dropdown.
+```
 
+```lua
 ### dropdown.Add(id, name)
 - `id`: Identifier for the dropdown item.
 - `name`: Name of the dropdown item.
+```
 
+```lua
 ### window.Notify(options)
 - `options`:
   - `title`: Title of the notification.
   - `desc`: Description of the notification.
   - `icon`: Icon for the Notification (Roblox asset id).
+```
 
 ## Example Usage
 ```lua
