@@ -14,7 +14,7 @@ https://discord.gg/WTaFGBGyHA
 
 ### Library.CreateLib(options)
 - `options`:
-  - `bgt`: Background type (default: 0).
+  - `bgt`: Background transparency (default: 0).
 
 ### window.Tab(options)
 - `options`:
@@ -47,3 +47,34 @@ https://discord.gg/WTaFGBGyHA
 - `options`:
   - `title`: Title of the notification.
   - `desc`: Description of the notification.
+  - `icon`: Icon for the Notification (Roblox asset id).
+
+## Example Usage
+```lua
+local window = Moon.CreateLib({
+	bgt = 0, -- default
+})
+local tab = window.Tab({
+	name = "Tab",
+	icon = "rbxid thing"
+})
+local btn = tab.Button({
+	name = "Button",
+	callback = function() end
+})
+local tog = tab.Toggle({
+	name = "Toggle",
+	callback = function(b) end
+})
+local label = tab.Label({
+	text = "Label"
+})
+local dropdown = tab.Dropdown({
+	name = "Dropdown"
+})
+dropdown.Add(1, "name")
+local notif = window.Notify({
+	title = "Notification",
+	desc = "Description",
+})
+```
