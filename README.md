@@ -1,108 +1,49 @@
-# Moon.lua
-Moon-UI 99% Complete
+### MOON.LUA - 1.0a
 
-===== Docs =====
+## About us
+This project offers a completely free and keyless script for Blade Ball. The estimated time of arrival (ETA) for its release is currently unknown. Our goal is to provide a high-quality script that brings satisfaction and enjoyment to our users.
+## Goals
+- Fully automatic spam
+- Effective spam detection
+- Keyless operation (for as long as possible)
+- Completely free (boosts on the discord are still appreciated)
+## discord
+https://discord.gg/WTaFGBGyHA
 
-Importing the library
-```lua
-local Library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ImNotACoderAi/Moon.lua/main/Main.lua')))()
-```
+## docs
 
-Creating a window
+### Library.CreateLib(options)
+- `options`:
+  - `bgt`: Background type (default: 0).
 
-```lua
-local window = Library.CreateLib()
-# args
-<
-none
->
-```
+### window.Tab(options)
+- `options`:
+  - `name`: Name of the tab.
+  - `icon`: Icon for the tab (Roblox asset id).
 
-Creating a Tab
+### tab.Button(options)
+- `options`:
+  - `name`: Name of the button.
+  - `callback`: Function to call when the button is clicked.
 
-```lua
-local tab = window.Tab()
-# args
-<
-name - name of the tab
-icon - the icon show beside the tab
->
-```
+### tab.Toggle(options)
+- `options`:
+  - `name`: Name of the toggle.
+  - `callback`: Function to call when the toggle state changes. Receives a boolean parameter `state`.
 
-Creating a Button
+### tab.Label(options)
+- `options`:
+  - `text`: Text to display in the label.
 
-```lua
-local button = tab.Button()
-# args
-<
-name - name of the Button
-callback - takes a function for example "function() print("button was clicked") end"
->
-```
+### tab.Dropdown(options)
+- `options`:
+  - `name`: Name of the dropdown.
 
-Creating a Toggle
+### dropdown.Add(id, name)
+- `id`: Identifier for the dropdown item.
+- `name`: Name of the dropdown item.
 
-```lua
-local Toggle = tab.Toggle()
-# args
-<
-name - name of the Toggle
-callback - takes a function for example "function(b)
-  if b == true then
-    print("on")
-  else
-    print("off")
-  end
-end"
->
-```
-
-Creating a Slider
-
-```lua
-local Slider = tab.Slider()
-# args
-<
-name - name of the Slider
-callback - takes a function for example "function(v)
-  if v == 100 then
-    print("max")
-  elseif v == 0 then
-    print("min")
-end"
->
-# methods
-<
-SetValue - sets the text call this by Label:SetValue(0 - 100)
->
-```
-
-Creating a Label
-
-```lua
-local Label = tab.Label()
-# args
-<
-text - text inside the label
->
-# methods
-<
-SetText - sets the text call this by Label:SetText("text")
->
-```
-
-Creating a Dropdown
-
-```lua
-local Dropdown = tab.Dropdown()
-# args
-<
-name - name of the dropdown
->
-# methods
-<
-Dropdown.Add(id, value) - adds a option to the dropdown for example dropdown.add(1, "option 1")
-Dropdown.Remove(id)
-Dropdown.Clear()
->
-```
+### window.Notify(options)
+- `options`:
+  - `title`: Title of the notification.
+  - `desc`: Description of the notification.
