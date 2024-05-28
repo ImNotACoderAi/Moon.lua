@@ -66,9 +66,22 @@ do
 			end
 		end)
 	end
+	
+	function Moon.Theme(defaults, themes)
+		for i, v in pairs(defaults) do
+			if themes[i] == nil then
+				themes[i] = v
+			end
+		end
+		return themes
+	end
 end
 
-function Moon.CreateLib()
+function Moon.CreateLib(themes)
+	themes = Moon.Theme({
+		bgt = 0
+	}, themes or {})
+	
 	local lib = {
 		CurrentTab = nil,
 		Close = false
@@ -90,6 +103,7 @@ function Moon.CreateLib()
 		lib["2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 		lib["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		lib["2"]["Name"] = [[Main]];
+		lib["2"]["BackgroundTransparency"] = themes.bgt;
 
 		-- StarterGui.Moon.Main.UICorner
 		lib["3"] = Instance.new("UICorner", lib["2"]);
@@ -177,6 +191,33 @@ function Moon.CreateLib()
 		lib["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		lib["13"]["Name"] = [[TabContainer]];
 		lib["13"]["BackgroundTransparency"] = 1;
+		
+		-- StarterGui.Moon.Notification Holder
+		lib["43"] = Instance.new("ScrollingFrame", lib["1"]);
+		lib["43"]["Active"] = true;
+		lib["43"]["ScrollingDirection"] = Enum.ScrollingDirection.Y;
+		lib["43"]["BorderSizePixel"] = 0;
+		lib["43"]["CanvasPosition"] = Vector2.new(0, 579);
+		lib["43"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		lib["43"]["Name"] = [[Notification Holder]];
+		lib["43"]["ClipsDescendants"] = false;
+		lib["43"]["Size"] = UDim2.new(0.24108, 0, 1, 0);
+		lib["43"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
+		lib["43"]["Position"] = UDim2.new(0.75892, 0, 0, 0);
+		lib["43"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		lib["43"]["ScrollBarThickness"] = 0;
+		lib["43"]["BackgroundTransparency"] = 1;
+		
+		-- StarterGui.Moon.Notification Holder.UIListLayout
+		lib["44"] = Instance.new("UIListLayout", lib["43"]);
+		lib["44"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
+		lib["44"]["Padding"] = UDim.new(0, 10);
+		lib["44"]["VerticalAlignment"] = Enum.VerticalAlignment.Bottom;
+		lib["44"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+		
+		-- StarterGui.Moon.Notification Holder.UIPadding
+		lib["4e"] = Instance.new("UIPadding", lib["43"]);
+		lib["4e"]["PaddingBottom"] = UDim.new(0, 15);
 	end
 	
 	function lib.Tab(options)
@@ -1065,6 +1106,127 @@ function Moon.CreateLib()
 		end
 		
 		return Tab
+	end
+	
+	function lib.Notify(options)
+		options = Moon.validate({
+			title = "Notification",
+			desc = "Description",
+			icon = "rbxassetid://11162370676",
+			timeout = 4
+		}, options or {})
+		
+		if options["timeout"] <= 4 then options["timeout"] = 4 print("Timeout number cannot be lower than 4") end
+		
+		local Notify = {}
+		
+		-- StarterGui.Moon.Notification Holder.Notif
+		Notify["45"] = Instance.new("Frame", lib["43"]);
+		Notify["45"]["BorderSizePixel"] = 0;
+		Notify["45"]["BackgroundColor3"] = Color3.fromRGB(35, 35, 35);
+		Notify["45"]["AnchorPoint"] = Vector2.new(1, 1);
+		Notify["45"]["Size"] = UDim2.new(0, 200, 0, 40);
+		Notify["45"]["Position"] = UDim2.new(1, -10, 1, -10);
+		Notify["45"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		Notify["45"]["Name"] = [[Notif]];
+		Notify["45"]["BackgroundTransparency"] = 1;
+		Notify["45"]["Visible"] = false;
+
+		-- StarterGui.Moon.Notification Holder.Notif.UICorner
+		Notify["46"] = Instance.new("UICorner", Notify["45"]);
+
+
+		-- StarterGui.Moon.Notification Holder.Notif.Shadow
+		Notify["47"] = Instance.new("ImageLabel", Notify["45"]);
+		Notify["47"]["ZIndex"] = -1;
+		Notify["47"]["BorderSizePixel"] = 0;
+		Notify["47"]["SliceCenter"] = Rect.new(100, 100, 400, 400);
+		Notify["47"]["ScaleType"] = Enum.ScaleType.Slice;
+		Notify["47"]["ImageTransparency"] = 0.2;
+		Notify["47"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
+		Notify["47"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+		Notify["47"]["Image"] = options["icon"];
+		Notify["47"]["Size"] = UDim2.new(1, 100, 1, 100);
+		Notify["47"]["BackgroundTransparency"] = 1;
+		Notify["47"]["Name"] = [[Shadow]];
+		Notify["47"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
+
+		-- StarterGui.Moon.Notification Holder.Notif.Title
+		Notify["48"] = Instance.new("TextLabel", Notify["45"]);
+		Notify["48"]["BorderSizePixel"] = 0;
+		Notify["48"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+		Notify["48"]["TextYAlignment"] = Enum.TextYAlignment.Top;
+		Notify["48"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		Notify["48"]["TextSize"] = 15;
+		Notify["48"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+		Notify["48"]["TextColor3"] = Color3.fromRGB(221, 221, 221);
+		Notify["48"]["BackgroundTransparency"] = 1;
+		Notify["48"]["Size"] = UDim2.new(1, 0, 1, 0);
+		Notify["48"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		Notify["48"]["Text"] = options["title"];
+		Notify["48"]["Name"] = [[Title]];
+		Notify["48"]["TextTransparency"] = 1;
+
+		-- StarterGui.Moon.Notification Holder.Notif.Title.UIPadding
+		Notify["49"] = Instance.new("UIPadding", Notify["48"]);
+		Notify["49"]["PaddingTop"] = UDim.new(0, 5);
+		Notify["49"]["PaddingLeft"] = UDim.new(0, 8);
+
+		-- StarterGui.Moon.Notification Holder.Notif.Desc
+		Notify["4a"] = Instance.new("TextLabel", Notify["45"]);
+		Notify["4a"]["TextWrapped"] = true;
+		Notify["4a"]["BorderSizePixel"] = 0;
+		Notify["4a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+		Notify["4a"]["TextYAlignment"] = Enum.TextYAlignment.Bottom;
+		Notify["4a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		Notify["4a"]["TextSize"] = 13;
+		Notify["4a"]["FontFace"] = Font.new([[rbxasset://fonts/families/Ubuntu.json]], Enum.FontWeight.Light, Enum.FontStyle.Normal);
+		Notify["4a"]["TextColor3"] = Color3.fromRGB(96, 96, 96);
+		Notify["4a"]["BackgroundTransparency"] = 1;
+		Notify["4a"]["Size"] = UDim2.new(1, 0, 1, 0);
+		Notify["4a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		Notify["4a"]["Text"] = options["desc"];
+		Notify["4a"]["Name"] = [[Desc]];
+		Notify["4a"]["TextTransparency"] = 1;
+
+		-- StarterGui.Moon.Notification Holder.Notif.Desc.UIPadding
+		Notify["4b"] = Instance.new("UIPadding", Notify["4a"]);
+		Notify["4b"]["PaddingLeft"] = UDim.new(0, 8);
+		Notify["4b"]["PaddingBottom"] = UDim.new(0, 6);
+
+		-- StarterGui.Moon.Notification Holder.Notif.ImageLabel
+		Notify["4c"] = Instance.new("ImageLabel", Notify["45"]);
+		Notify["4c"]["BorderSizePixel"] = 0;
+		Notify["4c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+		Notify["4c"]["AnchorPoint"] = Vector2.new(1, 0.5);
+		Notify["4c"]["Image"] = [[rbxassetid://17641533694]];
+		Notify["4c"]["Size"] = UDim2.new(0, 20, 0, 20);
+		Notify["4c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+		Notify["4c"]["BackgroundTransparency"] = 1;
+		Notify["4c"]["Position"] = UDim2.new(1, -10, 0.5, 0);
+		Notify["47"]["ImageTransparency"] = 1;
+
+		-- StarterGui.Moon.Notification Holder.Notif.ImageLabel.UICorner
+		Notify["4d"] = Instance.new("UICorner", Notify["4c"]);
+		Notify["4d"]["CornerRadius"] = UDim.new(0, 7);
+		
+		-- logic
+		do
+			Notify["45"].Visible = true
+			Moon.tween(ti, Notify["45"], {BackgroundTransparency = 0})
+			wait(0.3)
+			Moon.tween(ti, Notify["4c"], {ImageTransparency = 0})
+			Moon.tween(ti, Notify["4a"], {TextTransparency = 0})
+			Moon.tween(ti, Notify["48"], {TextTransparency = 0})
+			wait(options["timeout"])
+			Moon.tween(ti, Notify["4c"], {ImageTransparency = 1})
+			Moon.tween(ti, Notify["4a"], {TextTransparency = 1})
+			Moon.tween(ti, Notify["48"], {TextTransparency = 1})
+			wait(0.3)
+			Moon.tween(ti, Notify["45"], {BackgroundTransparency = 1}, function() Notify["45"]:Destroy() end)
+		end
+		
+		return Notify
 	end
 	
 	Moon.makeDraggable(lib["2"], true)
