@@ -66,7 +66,7 @@ do
 			end
 		end)
 	end
-	
+
 	function Moon.Theme(defaults, themes)
 		for i, v in pairs(defaults) do
 			if themes[i] == nil then
@@ -81,12 +81,12 @@ function Moon.CreateLib(themes)
 	themes = Moon.Theme({
 		bgt = 0
 	}, themes or {})
-	
+
 	local lib = {
 		CurrentTab = nil,
 		Close = false
 	}
-	
+
 	do
 		-- StarterGui.Moon
 		lib["1"] = Instance.new("ScreenGui", run:IsStudio() and ps.LocalPlayer:WaitForChild("PlayerGui") or cg);
@@ -119,10 +119,10 @@ function Moon.CreateLib(themes)
 		lib["4"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
 		lib["4"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
 		lib["4"]["Image"] = [[rbxassetid://11162370676]];
-		lib["4"]["Size"] = UDim2.new(1.27292, 0, 1.26061, 0);
+		lib["4"]["Size"] = UDim2.new(1, 135, 1, 135);
 		lib["4"]["BackgroundTransparency"] = 1;
 		lib["4"]["Name"] = [[Shadow]];
-		lib["4"]["Position"] = UDim2.new(0.5, 0, 0.48485, 5);
+		lib["4"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 
 		-- StarterGui.Moon.Main.UIPadding
 		lib["5"] = Instance.new("UIPadding", lib["2"]);
@@ -144,7 +144,7 @@ function Moon.CreateLib(themes)
 		lib["7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		lib["7"]["Name"] = [[Nav]];
 		lib["7"]["BackgroundTransparency"] = 1;
-		
+
 		-- StarterGui.Moon.Main.Nav.Wrapper
 		lib["8"] = Instance.new("ScrollingFrame", lib["7"]);
 		lib["8"]["Active"] = true;
@@ -157,7 +157,7 @@ function Moon.CreateLib(themes)
 		lib["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		lib["8"]["ScrollBarThickness"] = 0;
 		lib["8"]["BackgroundTransparency"] = 1;
-		
+
 		-- StarterGui.Moon.Main.Nav.Wrapper.Tab.UICorner
 		lib["f"] = Instance.new("UICorner", lib["e"]);
 		lib["f"]["CornerRadius"] = UDim.new(0, 7);
@@ -165,7 +165,7 @@ function Moon.CreateLib(themes)
 		-- StarterGui.Moon.Main.Nav.Wrapper.Tab.UIPadding
 		lib["10"] = Instance.new("UIPadding", lib["e"]);
 		lib["10"]["PaddingLeft"] = UDim.new(0, 24);
-		
+
 		-- StarterGui.Moon.Main.Nav.Wrapper.UIListLayout
 		lib["d"] = Instance.new("UIListLayout", lib["8"]);
 		lib["d"]["Padding"] = UDim.new(0, 6);
@@ -191,7 +191,7 @@ function Moon.CreateLib(themes)
 		lib["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		lib["13"]["Name"] = [[TabContainer]];
 		lib["13"]["BackgroundTransparency"] = 1;
-		
+
 		-- StarterGui.Moon.Notification Holder
 		lib["43"] = Instance.new("ScrollingFrame", lib["1"]);
 		lib["43"]["Active"] = true;
@@ -207,30 +207,30 @@ function Moon.CreateLib(themes)
 		lib["43"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		lib["43"]["ScrollBarThickness"] = 0;
 		lib["43"]["BackgroundTransparency"] = 1;
-		
+
 		-- StarterGui.Moon.Notification Holder.UIListLayout
 		lib["44"] = Instance.new("UIListLayout", lib["43"]);
 		lib["44"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
 		lib["44"]["Padding"] = UDim.new(0, 10);
 		lib["44"]["VerticalAlignment"] = Enum.VerticalAlignment.Bottom;
 		lib["44"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-		
+
 		-- StarterGui.Moon.Notification Holder.UIPadding
 		lib["4e"] = Instance.new("UIPadding", lib["43"]);
 		lib["4e"]["PaddingBottom"] = UDim.new(0, 15);
 	end
-	
+
 	function lib.Tab(options)
 		options = Moon.validate({
 			name = "Preview Tab",
 			icon = "rbxassetid://17594347148"
 		}, options or {})
-		
+
 		local Tab = {
 			Hover = false,
 			Active = false
 		}
-		
+
 		do
 			-- StarterGui.Moon.Main.Nav.Wrapper.Tab
 			Tab["9"] = Instance.new("TextLabel", lib["8"]);
@@ -264,7 +264,7 @@ function Moon.CreateLib(themes)
 			Tab["c"]["BackgroundTransparency"] = 1;
 			Tab["c"]["Name"] = [[Icon]];
 			Tab["c"]["Position"] = UDim2.new(0, -20, 0, 4);
-			
+
 			-- StarterGui.Moon.Main.TabContainer.TabWrapper
 			Tab["14"] = Instance.new("ScrollingFrame", lib["13"]);
 			Tab["14"]["Active"] = true;
@@ -278,12 +278,12 @@ function Moon.CreateLib(themes)
 			Tab["14"]["ScrollBarThickness"] = 0;
 			Tab["14"]["BackgroundTransparency"] = 1;
 			Tab["14"]["Visible"] = false;
-			
+
 			-- StarterGui.Moon.Main.TabContainer.TabWrapper.UIListLayout
 			lib["1b"] = Instance.new("UIListLayout", Tab["14"]);
 			lib["1b"]["Padding"] = UDim.new(0, 6);
 			lib["1b"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-			
+
 			-- StarterGui.Moon.Main.TabContainer.TabWrapper.UIPadding
 			lib["1a"] = Instance.new("UIPadding", Tab["14"]);
 			lib["1a"]["PaddingTop"] = UDim.new(0, 6);
@@ -291,7 +291,7 @@ function Moon.CreateLib(themes)
 			lib["1a"]["PaddingLeft"] = UDim.new(0, 1);
 			lib["1a"]["PaddingBottom"] = UDim.new(0, 1);
 		end
-		
+
 		-- Methods
 		function Tab.Activate()
 			if not Tab.Active then
@@ -352,18 +352,18 @@ function Moon.CreateLib(themes)
 				Tab.Activate()
 			end
 		end
-		
+
 		function Tab.Button(options)
 			options = Moon.validate({
 				name = "Button",
 				callback = function() end
 			}, options or {})
-			
+
 			local Button = {
 				Hover = false,
 				MouseDown = false
 			}
-			
+
 			do
 				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Button
 				Button["15"] = Instance.new("Frame", Tab["14"]);
@@ -410,7 +410,7 @@ function Moon.CreateLib(themes)
 				Button["19"]["Name"] = [[Click]];
 				Button["19"]["Position"] = UDim2.new(1, -1, 0.5, 0);
 			end
-			
+
 			-- Logic
 			do
 				Button["15"].MouseEnter:Connect(function()
@@ -450,22 +450,22 @@ function Moon.CreateLib(themes)
 					end
 				end)
 			end	
-			
+
 			return Button
 		end
-		
+
 		function Tab.Toggle(options)
 			options = Moon.validate({
 				name = "Toggle",
 				callback = function() end
 			}, options or {})
-			
+
 			local Toggle = {
 				Hover = false,
 				MouseDown = false,
 				State = false
 			}
-			
+
 			do
 				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Toggle
 				Toggle["1c"] = Instance.new("Frame", Tab["14"]);
@@ -527,7 +527,7 @@ function Moon.CreateLib(themes)
 				Toggle["22"]["Name"] = [[Checkmark]];
 				Toggle["22"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 			end
-			
+
 			do
 				function Toggle:ChangeState(b)
 					if b == nil then
@@ -573,7 +573,7 @@ function Moon.CreateLib(themes)
 					end
 				end)
 			end
-			
+
 			do
 				input.InputBegan:Connect(function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 and Toggle.Hover then
@@ -599,17 +599,17 @@ function Moon.CreateLib(themes)
 					end
 				end)
 			end
-			
+
 			return Toggle
 		end
-		
+
 		function Tab.Label(options)
 			options = Moon.validate({
 				text = "Label"
 			}, options or {})
-			
+
 			local Label = {}
-			
+
 			do
 				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Info
 				Label["23"] = Instance.new("Frame", Tab["14"]);
@@ -663,7 +663,7 @@ function Moon.CreateLib(themes)
 				Label["28"]["Name"] = [[Info]];
 				Label["28"]["Position"] = UDim2.new(0, -0, 0, -1);
 			end
-			
+
 			do
 				function Label.SetText(text)
 					options.text = text
@@ -677,12 +677,12 @@ function Moon.CreateLib(themes)
 					Label["25"].Size = UDim2.new(Label["25"].Size.X.Scale, Label["25"].Size.X.Offset, 0, Label["25"].TextBounds.Y)
 					Moon.tween(ti, Label["23"], {Size = UDim2.new(Label["23"].Size.X.Scale, Label["23"].Size.X.Offset, 0, Label["25"].TextBounds.Y + 12)})
 				end
-				
+
 				Label["23"].MouseEnter:Connect(function()
 					Moon.tween(ti, Label["23"], {BackgroundColor3 = Color3.fromRGB(68, 68, 68)})
 					Moon.tween(ti, Label["25"], {TextColor3 = Color3.fromRGB(255, 255, 255)})
 				end)
-				
+
 				Label["23"].MouseLeave:Connect(function()
 					Moon.tween(ti, Label["23"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
 					Moon.tween(ti, Label["25"], {TextColor3 = Color3.fromRGB(221, 221, 221)})
@@ -690,10 +690,10 @@ function Moon.CreateLib(themes)
 
 				Label._update()
 			end
-			
+
 			return Label
 		end
-		
+
 		function Tab.Slider(options)
 			options = Moon.validate({
 				name = "Preview Slider",
@@ -702,14 +702,14 @@ function Moon.CreateLib(themes)
 				default = (options["max"]/2),
 				callback = function(v) print(v) end
 			}, options or {})
-			
+
 			local Slider = {
 				MouseDown = false,
 				Hover = false,
 				Connection = nil,
 				Options = options
 			}
-			
+
 			do
 				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Slider
 				Slider["29"] = Instance.new("Frame", Tab["14"]);
@@ -782,7 +782,7 @@ function Moon.CreateLib(themes)
 				Slider["31"] = Instance.new("UICorner", Slider["30"]);
 				Slider["31"]["CornerRadius"] = UDim.new(0, 4);
 			end
-			
+
 			-- Methods
 			function Slider:SetValue(v)
 				if v == nil then
@@ -809,7 +809,7 @@ function Moon.CreateLib(themes)
 					Sliderdrag = true
 					Moon.tween(ti, Slider["30"], {BackgroundColor3 = Color3.fromRGB(102, 102, 102)})
 					Moon.tween(ti, Slider["29"], {BackgroundColor3 = Color3.fromRGB(68, 68, 68)})
-					
+
 				end)
 
 				Slider["29"].MouseLeave:Connect(function()
@@ -854,10 +854,10 @@ function Moon.CreateLib(themes)
 					end
 				end)
 			end
-			
+
 			return Slider
 		end
-		
+
 		function Tab.Dropdown(options)
 			options = Moon.validate({
 				name = "Preview Dropdown",
@@ -876,7 +876,7 @@ function Moon.CreateLib(themes)
 				Hover = false,
 				HoveringItem = false
 			}
-			
+
 			do
 				-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown
 				Dropdown["32"] = Instance.new("Frame", Tab["14"]);
@@ -951,14 +951,14 @@ function Moon.CreateLib(themes)
 				Dropdown["39"]["PaddingLeft"] = UDim.new(0, 1);
 				Dropdown["39"]["PaddingBottom"] = UDim.new(0, 1);
 			end
-			
+
 			do
 				function Dropdown.Add(id, value, call, options)
 					options = Moon.validate({
 						callback = function(call) print(call) end,
 						items = {}
 					}, options or {})
-					
+
 					local Item = {
 						Hover = false,
 						MouseDown = false
@@ -973,7 +973,7 @@ function Moon.CreateLib(themes)
 						value = value,
 						call = value
 					}
-					
+
 					do
 						-- StarterGui.Moon.Main.TabContainer.TabWrapper.Dropdown.Options.Inactive
 						Dropdown.Items[id].instance["3a"] = Instance.new("TextLabel", Dropdown["37"]);
@@ -1000,7 +1000,7 @@ function Moon.CreateLib(themes)
 					Dropdown.Items[id].instance["3a"].MouseEnter:Connect(function()
 						Item.Hover = true
 						Dropdown.HoveringItem = true
-						
+
 						Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(62, 62, 62)})
 					end)
 
@@ -1012,7 +1012,7 @@ function Moon.CreateLib(themes)
 							Moon.tween(ti, Dropdown.Items[id].instance["3a"], {BackgroundColor3 = Color3.fromRGB(58, 58, 58)})
 						end
 					end)
-					
+
 					input.InputBegan:Connect(function(input)
 
 						if Dropdown.Items[id] == nil then return end
@@ -1083,7 +1083,7 @@ function Moon.CreateLib(themes)
 			do
 				Dropdown["32"].MouseEnter:Connect(function()
 					Dropdown.Hover = true
-					
+
 					if not Dropdown.Open then
 						Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(68, 68, 68)})
 					else
@@ -1110,7 +1110,7 @@ function Moon.CreateLib(themes)
 						else
 							Moon.tween(ti, Dropdown["32"], {BackgroundColor3 = Color3.fromRGB(48, 48, 48)})
 						end
-						
+
 						if not Dropdown.HoveringItem then
 							Dropdown.Toggle()
 						end
@@ -1132,134 +1132,26 @@ function Moon.CreateLib(themes)
 					end
 				end)
 			end
-					
+
 			local items = options.items
-					
-		return Dropdown
+
+			return Dropdown
 		end
-	return Tab
-	end
-	
-	Moon.makeDraggable(lib["2"], true)
-	
-	-- close anim
-	do
-		local done = false
-		
-		lib["12"].MouseEnter:Connect(function()
-			lib.Close = true
-		end)
-		
-		lib["12"].MouseLeave:Connect(function()
-			lib.Close = false
-		end)
-		
-		input.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 and lib.Close then
-				for i, v in lib["2"]:GetDescendants() do
-					if v:IsA("Frame") then
-						Moon.tween(ti,v, {BackgroundTransparency = 1}, function() v.Visible = false end)
-					end
-					if v:IsA("TextLabel") then
-						Moon.tween(ti,v, {BackgroundTransparency = 1})
-						Moon.tween(ti,v, {TextTransparency = 1}, function() v.Visible = false end)
-					end
-					if v:IsA("ImageLabel") then
-						Moon.tween(ti, v, {BackgroundTransparency = 1})
-						Moon.tween(ti, v, {ImageTransparency = 1}, function() 
-							v.Visible = false 
-							Moon.tween(tis, lib["2"], {Size = UDim2.new(0, 0, 0, 0)}, function() wait(1.2) done = true end)
-						end)
-					elseif v.Name == "Shadow" then
-
-						if done == true then
-							lib["1"].Enabled = false
-							lib.Close = false
-						end
-					end	
-				end
-			end
-		end)
-		
-		input.InputBegan:Connect(function(input)
-			if input.KeyCode == Enum.KeyCode.RightControl and lib.Close == false then
-				lib["1"].Enabled = true
-				lib.Close = true
-				Moon.tween(tis, lib["2"], {Size = UDim2.new(0, 480, 0, 330)})
-				wait(0.8)
-				for i, v in lib["2"]:GetDescendants() do
-					if v.Name == "TabContainer" then
-						v.Visible = true
-						for i, c in v:GetDescendants() do
-							if c.Name == "TabWrapper" then
-								c.Visible = true
-							end
-							if c:IsA("Frame") then
-								c.Visible = true
-								Moon.tween(ti, c, {BackgroundTransparency = 0})
-							elseif c:IsA("ScrollingFrame") and c.Name == "Options" then
-								c.Visible = true
-								for i, o in c:GetDescendants() do
-									if o:IsA("TextLabel") then
-										o.BackgroundTransparency = 0
-									end
-								end
-							end
-							if c:IsA("TextLabel") then
-								c.Visible = true
-								Moon.tween(ti, c, {TextTransparency = 0})
-							end
-							if c:IsA("ImageLabel") and c.Name ~= "Checkmark" then
-								c.Visible = true
-								Moon.tween(ti, c, {ImageTransparency = 0})
-							end
-						end
-					
-					elseif v.Name == "Nav" then
-						v.Visible = true
-						for i, d in v:GetDescendants() do
-							if d.Name == "Close" then
-								d.Visible = true
-								Moon.tween(ti, d, {ImageTransparency = 0})
-							end
-							if d:IsA("TextLabel") and d.Name ~= "Tab" then
-								d.Visible = true
-								Moon.tween(ti, d, {BackgroundTransparency = 0})
-								Moon.tween(ti, d, {TextTransparency = 0})
-							elseif d:IsA("TextLabel") and d.Name == "Tab" then
-								Moon.tween(ti, d, {TextTransparency = 0})
-							end
-							if d:IsA("ImageLabel") then
-								d.Visible = true
-								Moon.tween(ti, d, {ImageTransparency = 0})
-							end
-						end
-					end
-				end
-			end
-		end)
+		return Tab
 	end
 
-	Notify({
-title = "Moon UI",
-desc = "Made By @helloworld26445 aka Zephy"
-		})
-	
-	return lib
-end
-
-function Notify(options)
+	function lib.Notify(options)
 		options = Moon.validate({
 			title = "Notification",
 			desc = "Description",
-			icon = "rbxassetid://11162370676",
+			icon = "rbxassetid://17641533694",
 			timeout = 4
 		}, options or {})
-		
-		if options["timeout"] < 4 then options["timeout"] = 4 print("Timeout number cannot be lower than 4") end
-		
+
+		if options["timeout"] <	 4 then options["timeout"] = 4 print("Timeout number cannot be lower than 4") end
+
 		local Notify = {}
-		
+
 		-- StarterGui.Moon.Notification Holder.Notif
 		Notify["45"] = Instance.new("Frame", lib["43"]);
 		Notify["45"]["BorderSizePixel"] = 0;
@@ -1285,8 +1177,8 @@ function Notify(options)
 		Notify["47"]["ImageTransparency"] = 0.2;
 		Notify["47"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
 		Notify["47"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-		Notify["47"]["Image"] = options["icon"];
-		Notify["47"]["Size"] = UDim2.new(1, 100, 1, 100);
+		Notify["47"]["Image"] = [[rbxassetid://11162370676]];
+		Notify["47"]["Size"] = UDim2.new(1, 75, 1, 70);
 		Notify["47"]["BackgroundTransparency"] = 1;
 		Notify["47"]["Name"] = [[Shadow]];
 		Notify["47"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
@@ -1341,7 +1233,7 @@ function Notify(options)
 		Notify["4c"]["BorderSizePixel"] = 0;
 		Notify["4c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 		Notify["4c"]["AnchorPoint"] = Vector2.new(1, 0.5);
-		Notify["4c"]["Image"] = [[rbxassetid://17641533694]];
+		Notify["4c"]["Image"] = options.icon;
 		Notify["4c"]["Size"] = UDim2.new(0, 20, 0, 20);
 		Notify["4c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		Notify["4c"]["BackgroundTransparency"] = 1;
@@ -1351,24 +1243,138 @@ function Notify(options)
 		-- StarterGui.Moon.Notification Holder.Notif.ImageLabel.UICorner
 		Notify["4d"] = Instance.new("UICorner", Notify["4c"]);
 		Notify["4d"]["CornerRadius"] = UDim.new(0, 7);
-		
+
 		-- logic
 		do
 			Notify["45"].Visible = true
 			Moon.tween(ti, Notify["45"], {BackgroundTransparency = 0})
 			wait(0.3)
 			Moon.tween(ti, Notify["4c"], {ImageTransparency = 0})
+			Moon.tween(ti, Notify["47"], {ImageTransparency = 0})
 			Moon.tween(ti, Notify["4a"], {TextTransparency = 0})
 			Moon.tween(ti, Notify["48"], {TextTransparency = 0})
 			wait(options["timeout"])
 			Moon.tween(ti, Notify["4c"], {ImageTransparency = 1})
+			Moon.tween(ti, Notify["47"], {ImageTransparency = 1})
 			Moon.tween(ti, Notify["4a"], {TextTransparency = 1})
 			Moon.tween(ti, Notify["48"], {TextTransparency = 1})
 			wait(0.3)
 			Moon.tween(ti, Notify["45"], {BackgroundTransparency = 1}, function() Notify["45"]:Destroy() end)
 		end
-		
+
 		return Notify
 	end
+
+	Moon.makeDraggable(lib["2"], true)
+
+	-- close anim
+	do
+		local done = false
+
+		lib["12"].MouseEnter:Connect(function()
+			lib.Close = true
+		end)
+
+		lib["12"].MouseLeave:Connect(function()
+			lib.Close = false
+		end)
+
+		input.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 and lib.Close then
+				for i, v in lib["2"]:GetDescendants() do
+					if v:IsA("Frame") then
+						Moon.tween(ti,v, {BackgroundTransparency = 1}, function() v.Visible = false end)
+					end
+					if v:IsA("TextLabel") then
+						Moon.tween(ti,v, {BackgroundTransparency = 1})
+						Moon.tween(ti,v, {TextTransparency = 1}, function() v.Visible = false end)
+					end
+					if v:IsA("ImageLabel") then
+						Moon.tween(ti, v, {BackgroundTransparency = 1})
+						Moon.tween(ti, v, {ImageTransparency = 1}, function() 
+							v.Visible = false 
+							Moon.tween(tis, lib["2"], {Size = UDim2.new(0, 0, 0, 0)}, function() wait(1.2) done = true end)
+						end)
+					elseif v.Name == "Shadow" then
+
+						if done == true then
+							lib["1"].Enabled = false
+							lib.Close = false
+						end
+					end	
+				end
+			end
+		end)
+
+		input.InputBegan:Connect(function(input)
+			if input.KeyCode == Enum.KeyCode.RightControl then
+				print("hi")
+				lib["1"].Enabled = true
+				lib.Close = true
+				Moon.tween(tis, lib["2"], {Size = UDim2.new(0, 480, 0, 330)})
+				wait(0.8)
+				for i, v in lib["2"]:GetDescendants() do
+					if v.Name == "TabContainer" then
+						v.Visible = true
+						for i, c in v:GetDescendants() do
+							if c.Name == "TabWrapper" then
+								c.Visible = true
+							end
+							if c:IsA("Frame") then
+								c.Visible = true
+								Moon.tween(ti, c, {BackgroundTransparency = 0})
+							elseif c:IsA("ScrollingFrame") and c.Name == "Options" then
+								c.Visible = true
+								for i, o in c:GetDescendants() do
+									if o:IsA("TextLabel") then
+										o.BackgroundTransparency = 0
+									end
+								end
+							end
+							if c:IsA("TextLabel") then
+								c.Visible = true
+								Moon.tween(ti, c, {TextTransparency = 0})
+							end
+							if c:IsA("ImageLabel") and c.Name ~= "Checkmark" then
+								c.Visible = true
+								Moon.tween(ti, c, {ImageTransparency = 0})
+							end
+						end
+
+					elseif v.Name == "Nav" then
+						v.Visible = true
+						for i, d in v:GetDescendants() do
+							if d.Name == "Close" then
+								d.Visible = true
+								Moon.tween(ti, d, {ImageTransparency = 0})
+							end
+							if d:IsA("TextLabel") and d.Name ~= "Tab" then
+								d.Visible = true
+								Moon.tween(ti, d, {BackgroundTransparency = 0})
+								Moon.tween(ti, d, {TextTransparency = 0})
+							elseif d:IsA("TextLabel") and d.Name == "Tab" then
+								Moon.tween(ti, d, {TextTransparency = 0})
+							end
+							if d:IsA("ImageLabel") then
+								d.Visible = true
+								Moon.tween(ti, d, {ImageTransparency = 0})
+							end
+						end
+					elseif v.Name == "Shadow" then
+						v.Visible = true
+						Moon.tween(ti, v, {ImageTransparency = 0})
+					end
+				end
+			end
+		end)
+	end
+
+	lib.Notify({
+		title = "MoonUI By",
+		desc = "@helloworld26445 aka Zephy",
+		timeout = 7
+	})
+
+	return lib
 end
 return Moon
